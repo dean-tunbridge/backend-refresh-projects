@@ -3,8 +3,7 @@ const app = express()
 const PORT = 3000
 
 app.get('/', (req, res) => {
-  console.log('Hit an endpoint', req.method)
-  res.sendStatus(201)
+  res.send('<h1>This is html code</h1><input></input>')
 })
 
 app.get('/dashboard', (req, res) => {
