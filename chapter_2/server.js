@@ -3,12 +3,16 @@ const app = express()
 const PORT = 3000
 
 let data = {
-  name: 'Bean',
+  users: ['Bean'],
 }
+
+//Middleware
+app.use(express.json())
 
 // website endpoints
 app.get('/', (req, res) => {
   res.send(`
+    <h1>DATA</h1>
     <body>
     <p>${JSON.stringify(data)}</p>
     </body>
@@ -23,6 +27,13 @@ app.get('/dashboard', (req, res) => {
 app.get('/api/data', (req, res) => {
   console.log('this one is for data')
   res.send(data)
+})
+
+app.post('/api/data', (req, res) => {
+  const newData = req.body
+  console.log(newEntry)
+  data.push(newEntry.name)
+  res.sendStatus(201)
 })
 
 app.listen(PORT, () => {
