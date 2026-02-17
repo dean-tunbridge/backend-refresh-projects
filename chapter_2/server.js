@@ -15,12 +15,17 @@ app.get('/', (req, res) => {
     <h1>DATA</h1>
     <body>
     <p>${JSON.stringify(data)}</p>
+    <a href="/dashboard">Dashboard</href>
     </body>
     `)
 })
 
 app.get('/dashboard', (req, res) => {
-  res.send('<h1>DAshboard</h1>')
+  res.send(`
+    <body>
+    <h1>Dashboard</h1>
+    <a href="/">Home</href>
+    </body>`)
 })
 
 // API endpoints
