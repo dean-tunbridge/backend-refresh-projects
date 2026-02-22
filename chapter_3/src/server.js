@@ -5,14 +5,19 @@ import { fileURLToPath } from 'url'
 const app = express()
 const PORT = process.env.PORT || 5000
 
+// Filepath
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
+
+// Middleware
+app.use(express.json())
 app.use(express.static(path.join(__dirname, '../public')))
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'))
 })
 
+//Port
 app.listen(PORT, () => {
   console.log(`Server has started on port: ${PORT}`)
 })
