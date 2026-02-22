@@ -1,12 +1,18 @@
 import express from 'express'
-import bcrypt from 'bcryptjs'
-import jwt from 'jsonwebtoken'
 import db from '../db.js'
 
 const router = express.Router()
 
-router.post('/register', (req, res) => {})
+//Get all todo
+router.get('/', (req, res) => {})
 
-router.post('/login', (req, res) => {})
+//Create new todo
+router.post('/', (req, res) => {})
+
+//Update todo
+router.put('/', (req, res) => {})
+
+//Delete todo
+router.delete('/', (req, res) => {})
 
 export default router
