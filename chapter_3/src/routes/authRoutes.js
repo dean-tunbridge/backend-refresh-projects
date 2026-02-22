@@ -5,8 +5,17 @@ import db from '../db.js'
 
 const router = express.Router()
 
-router.post('/register', (req, res) => {})
+// /auth/register
+router.post('/register', (req, res) => {
+  const { username, password } = req.body
+  const hashedPassword = bcrypt.hashSync(password, 8)
+  res.sendStatus(201)
+})
 
-router.post('/login', (req, res) => {})
+// /auth/login
+router.post('/login', (req, res) => {
+  const {} = req.body
+  res.sendStatus(201)
+})
 
 export default router
