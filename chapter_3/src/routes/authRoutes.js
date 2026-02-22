@@ -9,6 +9,29 @@ const router = express.Router()
 router.post('/register', (req, res) => {
   const { username, password } = req.body
   const hashedPassword = bcrypt.hashSync(password, 8)
+
+  // Create new user
+  try {
+    const insertUser = db.prepare(`INSERT INTO users (username, password)
+      VALUES (?, ?)`)
+    const result = insertUser.run(username, hashedPassword)
+
+    // Create default todo
+    const defaultTodo = `Hello, Add your first todo`
+    const insertTodo = db.prepare(`INSERT INTO todos (user_id, task)
+      VALUES (?, ?)`)
+    insertTodo.run(result.lastInsertRowid, defaultTodo)
+
+    // Create a token
+    const token = jwt.sign(
+      { id: result.lastInsertRowid },
+      process.env.JWT_SECRET,
+      { expiresIn: '24h' },
+    )
+  } catch (err) {
+    console.log(err.message)
+    res.sendStatus(503)
+  }
   res.sendStatus(201)
 })
 
