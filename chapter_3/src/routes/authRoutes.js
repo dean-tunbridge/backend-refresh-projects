@@ -28,6 +28,7 @@ router.post('/register', (req, res) => {
       process.env.JWT_SECRET,
       { expiresIn: '24h' },
     )
+    res.json({ token })
   } catch (err) {
     console.log(err.message)
     res.sendStatus(503)
