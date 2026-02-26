@@ -38,8 +38,21 @@ router.post('/register', (req, res) => {
 
 // /auth/login
 router.post('/login', (req, res) => {
-  const {} = req.body
-  res.sendStatus(201)
+  const { username, password } = req.body
+
+  try {
+    const getUser = db.prepare('SELECT * FROM users WHERE username = ?')
+    const user = getUser.get(username)
+
+    if (!user) {
+      {
+        return res.status(404).send({ message: 'User not found' })
+      }
+    }
+  } catch (error) {
+    console.log(error.message)
+    res.sendStatus(503)
+  }
 })
 
 export default router
