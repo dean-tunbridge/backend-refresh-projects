@@ -60,6 +60,8 @@ router.post('/login', (req, res) => {
     const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
       expiresIn: '24h',
     })
+
+    res.json({ token })
   } catch (error) {
     console.log(error.message)
     res.sendStatus(503)
